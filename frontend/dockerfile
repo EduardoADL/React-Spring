@@ -1,0 +1,23 @@
+# Use a imagem oficial do Node.js como base
+FROM node:14
+
+# Defina o diretório de trabalho dentro do contêiner
+WORKDIR /usr/src/app
+
+# Copie os arquivos de Yarn (yarn.lock e package.json)
+COPY yarn.lock package.json ./
+
+# Instale as dependências usando Yarn
+RUN yarn
+
+# Copie todos os arquivos do projeto para o contêiner
+COPY . .
+
+# Construa o aplicativo React para produção usando Yarn
+RUN yarn build
+
+# Exponha a porta em que seu aplicativo estará em execução
+EXPOSE 5173
+
+# Inicialize o aplicativo quando o contêiner for iniciado
+CMD [ "yarn", "dev", "--host" ]

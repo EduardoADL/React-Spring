@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import job.challenge.backend.dto.UserDTO;
 import job.challenge.backend.dto.UserForm;
 import job.challenge.backend.service.UserService;

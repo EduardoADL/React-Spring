@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import './modalForm.scss'
+//import './modalForm.scss'
 
 import { User } from '~types/user.types'
 import { instance } from '~api/instance'
