@@ -24,8 +24,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm test
+    - run: cd frontend && npm ci
+    - run: cd frontend && npm test
   build:
 
     runs-on: ubuntu-latest
@@ -42,5 +42,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
+    - run: cd frontend && npm ci
+    - run: cd frontend && npm run build --if-present
