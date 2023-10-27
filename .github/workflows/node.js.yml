@@ -45,3 +45,36 @@ jobs:
         npm install -g yarn
         yarn install
     - run: npm run build --if-present
+    
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: |
+          npm install -g yarn
+          yarn install
+      - name: Login to Docker Hub
+        run: |
+          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+
+        working-directory: ./
+      - name: Build Docker image
+        run: |
+          docker-compose build
+        
+
+      - name: Push Docker image
+        run: |
+          docker-compose up
